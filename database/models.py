@@ -19,6 +19,8 @@ class Password(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), primary_key=True)
     password = db.Column(db.String, nullable=False)
 
+    user_fk = db.relationship(User)
+
 
 class PostPhoto(db.Model):
     __tablename__ = 'user_photos'
@@ -37,7 +39,7 @@ class Post(db.Model):
     post_text = db.Column(db.String, nullable=True)
     post_date = db.Column(db.DateTime)
 
-    post_fk = db.relationship(User)
+    user_fk = db.relationship(User)
     photo_fk = db.relationship(PostPhoto)
 
 
