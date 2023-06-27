@@ -28,14 +28,14 @@ def check_user_password_db(email, password):
 def get_all_users_db():
     users = User.query.all()
     if users:
-        return users.username
+        return users
     return False
 
 
 def get_exact_user_db(user_id):
     user = User.query.filter_by(user_id=user_id).first()
     if user:
-        return user.username
+        return user
     return False
 
 
