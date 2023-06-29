@@ -48,3 +48,27 @@ def add_comment_post_db(post_id, comment_user_id, comment_text):
     post_comment.user_id = comment_user_id
     post_comment.comment_date = datetime.now()
     db.session.commit()
+
+
+def get_comments_post_db(post_id):
+    comments = PostComment.query.filter_by(post_id=post_id).all()
+
+    if comments:
+        return comments
+    return False
+
+
+def change_comment_post_db(comment_user_id, comment_id, new_text):
+    post_comment = PostComment.query.filter_by(comment_user_id=comment_user_id, comment_id=comment_id).first()
+
+    post_comment.comment_text = new_text
+    post_comment.comment_date = datetime.now()
+    db.session.commit()
+    return post_comment
+
+
+def delete_comment_post_db(comment_user_id, comment_id):
+    post_comment = PostComment.query.filter_by(comment_user_id=comment_user_id, comment_id=comment_id).first()
+
+    db.session.delete(post_comment)
+    db.session.commit()
