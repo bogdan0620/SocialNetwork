@@ -1,4 +1,4 @@
-from models import User, Password, db
+from database.models import User, Password, db
 
 
 def register_user_db(**user_data):
@@ -27,16 +27,14 @@ def check_user_password_db(email, password):
 
 def get_all_users_db():
     users = User.query.all()
-    if users:
-        return users
-    return False
+
+    return users
 
 
 def get_exact_user_db(user_id):
-    user = User.query.filter_by(user_id=user_id).first()
-    if user:
-        return user
-    return False
+    exact_user = User.query.filter_by(user_id=user_id).first()
+
+    return exact_user
 
 
 def delete_user_db(user_id):
@@ -45,4 +43,5 @@ def delete_user_db(user_id):
     if user:
         db.session.delete(user)
         db.session.commit()
+        return True
     return False
